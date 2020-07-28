@@ -22,12 +22,9 @@ public class PatientController {
 	public String listPatients(Model model) {
 		
 		List<Patient> patients = patientService.getAll();
-		if(patients.isEmpty()) {
-			System.out.println("Empty");
-		}
-		for (Patient patient : patients) {
-			System.out.println(patient);
-		}
+
+		model.addAttribute("patients", patients);
+		
 		return "list-patients";
 	}
 }
