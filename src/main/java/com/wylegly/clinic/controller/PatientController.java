@@ -57,4 +57,29 @@ public class PatientController {
 		
 		return "patient-add";
 	}
+	
+	@GetMapping("/deletePatient")
+	public String showDeletePatientForm(
+			@RequestParam("patientId")int patientId){
+		patientService.remove(patientId);
+		return "redirect:/patients/list";
+	}
+	
+	@GetMapping("/searchPatient")
+	public String showSearchPatientForm(
+			@RequestParam("searchedName")String searchedName, Model model) {
+		
+		List<Patient> patientsFound = patientService.searchPatients(searchedName);
+		
+		model.addAttribute("patients", patientsFound);
+		
+		return "list-patients";
+	}
+	
+	
+	
+	
+	
+	
+	
 }

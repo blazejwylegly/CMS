@@ -4,6 +4,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 
 import org.hibernate.Session;
@@ -57,6 +58,12 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 	public void deleteWithId(int id) {
 		Session session = currentSession();
 		session.delete(session.get(daoType, id));
+		
+//		One may intend to override this using query for efficency:
+//		Query query = currentSession().createQuery("delete from Person where id:=theId");
+//		query.setParameter("theId", id);
+//		query.executeUpdate();
+				
 	}
 
 	@Override

@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html>
@@ -26,8 +29,16 @@
 			<br>
 			<input type="button" value="Add Patient"
 				   onclick="window.location.href ='addPatient'; return false;"
-				   class="add-button"
-			/>
+				   class="add-button"/>
+			<br><br>
+			
+			<form:form action="searchPatient" method="GET">
+				Search patient: <input type="text" name="searchedName"/>
+				<input type="submit" value="Search"
+				   class="add-button"/>
+			</form:form>
+			
+			
 			<!-- Table (list) of patients -->
 			<table>
 				<tr>
@@ -46,6 +57,10 @@
 						<c:param name="patientId" value="${tempPatient.id}"/>
 					</c:url>
 					
+					<c:url var="deleteLink" value="/patients/deletePatient">
+						<c:param name="patientId" value="${tempPatient.id}"/>
+					</c:url>					
+					
 					<tr>
 						<td> ${tempPatient.firstName} </td>
 						<td> ${tempPatient.secondName} </td>
@@ -54,6 +69,9 @@
 						<!-- Display update link -->
 						<td> 
 							<a href="${updateLink}">Update</a>
+							|
+							<a href="${deleteLink}"
+							onclick="if (!(confirm('Are you sure you want to delete this patient?'))) return false">Delete</a>
 						</td>
 					</tr>
 				</c:forEach>

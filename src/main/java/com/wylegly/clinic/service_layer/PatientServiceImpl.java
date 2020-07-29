@@ -1,6 +1,8 @@
 package com.wylegly.clinic.service_layer;
 
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,12 @@ public class PatientServiceImpl extends GenericServiceImpl<Patient> implements P
 	@Transactional
 	public void executePatientSpecificMethod() {
 		patientDao.patientSpecificMethod();
+	}
+
+	@Override
+	@Transactional
+	public List<Patient> searchPatients(String searchedName) {
+		return patientDao.searchPatients(searchedName);
 	}
 	
 	
