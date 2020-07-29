@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wylegly.clinic.domain.Patient;
 import com.wylegly.clinic.service_layer.PatientService;
@@ -26,5 +29,32 @@ public class PatientController {
 		model.addAttribute("patients", patients);
 		
 		return "list-patients";
+	}
+	
+	@GetMapping("/addPatient")
+	public String showAddPatientForm(Model model) {
+		Patient patient = new Patient();
+		
+		model.addAttribute("patient", patient);
+		
+		return "patient-add";
+	}
+	
+	@PostMapping("/savePatient")
+	public String savePatient(@ModelAttribute("patient") Patient patient) {
+		
+		patientService.saveOrUpdate(patient);
+		return "redirect:/patients/list";
+	}
+	
+	@GetMapping("/updatePatient")
+	public String showUpdatePatientForm(
+			@RequestParam("patientId")int patientId, Model model) {
+		
+		Patient patient = patientService.get(patientId);
+		
+		model.addAttribute("patient", patient);
+		
+		return "patient-add";
 	}
 }

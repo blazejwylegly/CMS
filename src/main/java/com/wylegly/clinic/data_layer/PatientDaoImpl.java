@@ -14,5 +14,15 @@ public class PatientDaoImpl extends GenericDaoImpl<Patient> implements PatientDa
 	/**
 	 * Implement Patient - specific methods
 	 * */
+
+	@Override
+	public Patient get(int id) {
+		
+		Patient patient = super.get(id);
+		System.out.println(patient.getId());
+		return patient;
+	}
+	
+	
 	
 }

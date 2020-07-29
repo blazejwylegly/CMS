@@ -45,15 +45,11 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 	protected Session currentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-		
-	@Override
-	public void add(T obj) {
-		currentSession().save(obj);
-	}
+
 
 	@Override
 	public void delete(T obj) {
-		currentSession().saveOrUpdate(obj);
+		currentSession().remove(obj);
 		
 	}
 
@@ -78,11 +74,6 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 		List<? extends T> list = session.createQuery(cq).getResultList();
 		
 		return (List<T>) list;
-	}
-
-	@Override
-	public void update(T obj) {
-		currentSession().update(obj);
 	}
 
 	@Override

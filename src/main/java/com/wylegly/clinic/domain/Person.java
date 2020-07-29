@@ -10,8 +10,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.pl.PESEL;
-
 @Entity
 @Table(name = "person")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -20,11 +18,10 @@ public abstract class Person {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", nullable = false, updatable = false)
+	@Column(name = "id")
 	protected int id;
 	
 	@Column(name = "pesel")
-	@PESEL
 	protected String pesel;
 	
 	@Column(name = "surname")
@@ -40,12 +37,13 @@ public abstract class Person {
 	
 	}
 	
-	public Person(@PESEL String pesel, String surname, 
-			String firstName, String secondName) {
-		this.pesel = pesel;
-		this.surname = surname;
-		this.firstName = firstName;
-		this.secondName = secondName;
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getPesel() {

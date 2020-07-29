@@ -4,12 +4,7 @@ import java.util.List;
 
 public interface GenericDao<T> {
 
-	/**
-     * Method that adds passed object to DB
-     * @param t object do be added
-     */
-	public void add(T obj);
-	
+
 	/**
      * Method that adds passed object to DB
      * @param t object do be added or updated
@@ -40,10 +35,6 @@ public interface GenericDao<T> {
      * @return collection of entities
      */
 	public List<T> getAll();
-	
-	/**
-     * FILL ME!
-     */
-	public void update(T obj); 
+
 }
 

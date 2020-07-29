@@ -51,19 +51,6 @@ public abstract class GenericServiceImpl<T> implements GenericService<T> {
 		return genericDao.get(id);
 	}
 
-	@Transactional()
-	@Override
-	public void add(T entity) {
-		genericDao.add(entity);
-		
-	}
-
-	@Transactional
-	@Override
-	public void update(T entity) {
-		genericDao.update(entity);
-		
-	}
 
 	@Transactional
 	@Override
