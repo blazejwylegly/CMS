@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
-    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
+    
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -12,7 +13,7 @@
 <head>
 	<meta charset="ISO-8859-1">
 	
-	<title>CMS - Add new patient</title>
+	<title>CMS - Add new doctor</title>
 	<link type="text/css"
 		rel = "stylesheet"
 		href="${pageContext.request.contextPath}/resources/css/style.css">
@@ -34,9 +35,9 @@
 	</div>
 	
 	<div id="container">
-		<h3>Add Patient</h3>
+		<h3>Add Doctor</h3>
 		
-		<form:form action="savePatient" modelAttribute="patient" method="POST">
+		<form:form action="saveDoctor" modelAttribute="doctor" method="POST">
 		
 		<form:hidden path="id"/>
 			<table>
@@ -62,29 +63,43 @@
 						<td><form:input path="pesel"/></td>
 					</tr>
 					
+					 
 					<tr>
-						<td><label>Select doctor in charge:</label></td>
+						<td><label>Work start:</label></td>
 						<td>
+							<fmt:formatDate type = "time" value = "${workStart}"/>
+							<form:input path="workStart"/>
 							
-							<form:select path="doctorInCharge" name="selectedDoctor">
-								<form:option value="" />
-								<form:options items="${doctorList}" itemValue="id" itemLabel="surname"/>								
-							</form:select>
-							
-						</td>	
+						</td>
+					</tr>
+					
+					
+					<tr>
+						<td><label>Work end:</label></td>
+						<td>
+							<form:input path="workEnd"/>
+							<fmt:formatDate type = "time" value = "${workEnd}"/>
+						</td>
+						
+					</tr>		
+					
+					<tr>
+						<td><label>Children doctor:</label></td>
+						<td><form:checkbox path="childrenDoctor"/></td>
 					</tr>
 					
 					<tr>
 						<td><label></label></td>
 						<td><input type="submit" value="Add" class="save"/></td>
 					</tr>
+					
 				</tbody>
 			</table>
 		</form:form>
 		
 		<div style="clear; both;"></div>
 		<p>
-			<a href="${pageContext.request.contextPath}/patients/list">Back to patients list</a>
+			<a href="${pageContext.request.contextPath}/doctors/list">Back to doctors list</a>
 		</p>
 		
 	</div>

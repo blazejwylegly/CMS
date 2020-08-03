@@ -46,7 +46,9 @@
 					<th>Second Name</th>
 					<th>Surname</th>
 					<th>Pesel</th>
+					<th>Doctor in charge id</th>
 					<th>Action</th>
+					
 				<tr/>
 				
 				<c:forEach var="tempPatient" items="${patients}">
@@ -66,6 +68,7 @@
 						<td> ${tempPatient.secondName} </td>
 						<td> ${tempPatient.surname} </td>
 						<td> ${tempPatient.pesel} </td>
+						<td> </td>
 						<!-- Display update link -->
 						<td> 
 							<a href="${updateLink}">Update</a>
@@ -79,6 +82,11 @@
 			</table>
 		</div>
 	</div>
+	
+	<p>
+		<a href="${pageContext.request.contextPath}/home">Back to home page</a>
+	</p>
+	
 
 </body>
 </html>

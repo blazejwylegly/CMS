@@ -19,7 +19,7 @@ public abstract class Person {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	protected int id;
+	private int id;
 	
 	@Column(name = "pesel")
 	protected String pesel;
