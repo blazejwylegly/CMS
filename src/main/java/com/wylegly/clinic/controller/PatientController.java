@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wylegly.clinic.domain.Patient;
+import com.wylegly.clinic.service_layer.DoctorService;
 import com.wylegly.clinic.service_layer.PatientService;
 
 @Controller
@@ -20,6 +22,8 @@ public class PatientController {
 
 	@Autowired
 	private PatientService patientService;
+	@Autowired
+	private DoctorService doctorService;
 	
 	@GetMapping("/list")
 	public String listPatients(Model model) {
@@ -36,12 +40,23 @@ public class PatientController {
 		Patient patient = new Patient();
 		
 		model.addAttribute("patient", patient);
+		model.addAttribute("doctorList", doctorService.getAll());
 		
 		return "patient-add";
 	}
 	
 	@PostMapping("/savePatient")
-	public String savePatient(@ModelAttribute("patient") Patient patient) {
+	public String savePatient(@ModelAttribute("patient") Patient patient,
+			BindingResult bindingResult) {
+		
+		Integer doctorInChargeId = Integer.parseInt(
+				(String)bindingResult.getFieldValue("doctorInCharge")
+				);
+		
+		if(doctorInChargeId != null) {
+			System.out.println(doctorInChargeId);
+			patient.setDoctorInCharge(doctorService.get(doctorInChargeId));
+		}
 		
 		patientService.saveOrUpdate(patient);
 		return "redirect:/patients/list";
@@ -52,7 +67,6 @@ public class PatientController {
 			@RequestParam("patientId")int patientId, Model model) {
 		
 		Patient patient = patientService.get(patientId);
-		
 		model.addAttribute("patient", patient);
 		
 		return "patient-add";
@@ -77,9 +91,7 @@ public class PatientController {
 	}
 	
 	
-	// Development branch comment
-	
-	
-	
+	// COMMENT FOR COMMIT TEST POURPOSES - MASTER
+
 	
 }
