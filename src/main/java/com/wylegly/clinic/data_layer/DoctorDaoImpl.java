@@ -2,12 +2,12 @@ package com.wylegly.clinic.data_layer;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.wylegly.clinic.domain.Doctor;
-import com.wylegly.clinic.domain.Patient;
 
 @Repository
 public class DoctorDaoImpl extends GenericDaoImpl<Doctor> implements DoctorDao {
@@ -30,21 +30,27 @@ public class DoctorDaoImpl extends GenericDaoImpl<Doctor> implements DoctorDao {
 		return query.getResultList();
 	}
 	
+	@Override
+	public Doctor get(int id) {
+		
+		Session session = currentSession();
+		
+		Doctor doctor = session.get(Doctor.class, id);
+		
+		Hibernate.initialize(doctor.getPatients());
+		return doctor;
+	}
+	
 //	@Override
-//	public Doctor get(int id) {
-//		
-//		Session session = currentSession();
-//		
-//		List<Patient> patients = session.createQuery(
-//				"select p " +
-//				"from Patient p " +
-//				"join fetch p.doctorInCharge " +
-//				"where p.id = :num", Patient.class)
-//			.setParameter("num", id)
-//			.list();
-//				
-//		System.out.println("Patients retrieved " + patients);
-//		return session.get(Doctor.class, id);
+//	public void delete(Doctor obj) {
+//		// TODO Auto-generated method stub
+//		super.delete(obj);
+//	}
+//	
+//	@Override
+//	public void deleteWithId(int id) {
+//		// TODO Auto-generated method stub
+//		super.deleteWithId(id);
 //	}
 
 

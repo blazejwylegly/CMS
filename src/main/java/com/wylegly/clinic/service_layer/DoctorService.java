@@ -18,5 +18,8 @@ public interface DoctorService extends GenericService<Doctor>{
 	 * @return docotrs containing specified name
 	 * */
 	public List<Doctor> searchDoctors(String searchedName);
+	
+	@Override
+	public Doctor get(int id);
 
 }

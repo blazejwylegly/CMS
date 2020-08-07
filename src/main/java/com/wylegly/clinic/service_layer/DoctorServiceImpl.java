@@ -35,6 +35,11 @@ public class DoctorServiceImpl extends GenericServiceImpl<Doctor> implements Doc
 		return doctorDao.searchDoctors(searchedName);
 	}
 
-		
+	@Override
+	@Transactional
+	public Doctor get(int id) {
+		return doctorDao.get(id);
+	}
+	
 	
 }

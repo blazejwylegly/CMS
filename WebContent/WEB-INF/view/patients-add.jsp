@@ -2,6 +2,10 @@
     pageEncoding="ISO-8859-1"%>
     
     
+<%@ page import="com.wylegly.clinic.domain.Person" %>
+<%@ page import="com.wylegly.clinic.domain.Patient" %>
+<%@ page import="com.wylegly.clinic.domain.Doctor" %>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -38,6 +42,11 @@
 		
 		<form:form action="savePatient" modelAttribute="patient" method="POST">
 		
+			<!-- Retrieve doctor in charge to display id -->
+				<%
+					Patient patient = (Patient)request.getAttribute("patient");
+					Doctor doctorInCharge = patient.getDoctorInCharge();
+				%>
 		<form:hidden path="id"/>
 			<table>
 				<tbody>
@@ -66,9 +75,14 @@
 						<td><label>Select doctor in charge:</label></td>
 						<td>
 							
-							<form:select path="doctorInCharge" name="selectedDoctor">
-								<form:option value="" />
-								<form:options items="${doctorList}" itemValue="id" itemLabel="surname"/>								
+							<form:select var="doc" path="doctorInCharge" name="selectedDoctor">
+							
+								<form:option value=""/>
+								<form:options 
+									items="${doctorList}" 
+									itemValue="id" 
+									itemLabel="fullName"
+								/>								
 							</form:select>
 							
 						</td>	

@@ -8,14 +8,14 @@
 <html>
 <head>
 
-<!-- Add reference to css -->
-<link type="text/css" 
-	rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/style.css"/>
-<meta charset="ISO-8859-1">
+	<!-- Add reference to css -->
+	<link type="text/css" 
+		rel="stylesheet"
+		href="${pageContext.request.contextPath}/resources/css/style.css"/>
 
+	<meta charset="ISO-8859-1">
 
-<title>Doctors list</title>
+	<title>Doctors list</title>
 
 
 </head>
