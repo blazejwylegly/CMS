@@ -9,7 +9,7 @@ Technologies used:
 - Java,
 - Spring Framework,
 - Hibernate,
-- HTML,
+- JSP & HTML,
 - CSS
 
 Main purpose of this project, was to learn Spring and Hibernate, therefore
