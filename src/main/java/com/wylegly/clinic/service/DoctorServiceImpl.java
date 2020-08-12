@@ -1,4 +1,4 @@
-package com.wylegly.clinic.service_layer;
+package com.wylegly.clinic.service;
 
 
 import java.util.List;
@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.wylegly.clinic.data_layer.DoctorDao;
-import com.wylegly.clinic.data_layer.GenericDao;
+import com.wylegly.clinic.dao.DoctorDao;
+import com.wylegly.clinic.dao.GenericDao;
 import com.wylegly.clinic.domain.Doctor;
 
 @Service
@@ -28,13 +28,11 @@ public class DoctorServiceImpl extends GenericServiceImpl<Doctor> implements Doc
 		this.doctorDao = (DoctorDao) doctorDao;
 	}
 
-
 	@Override
 	@Transactional
 	public List<Doctor> searchDoctors(String searchedName) {
 		return doctorDao.searchDoctors(searchedName);
 	}
 
-		
 	
 }

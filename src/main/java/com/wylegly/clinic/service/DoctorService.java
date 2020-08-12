@@ -1,4 +1,4 @@
-package com.wylegly.clinic.service_layer;
+package com.wylegly.clinic.service;
 
 import java.util.List;
 
@@ -18,5 +18,5 @@ public interface DoctorService extends GenericService<Doctor>{
 	 * @return docotrs containing specified name
 	 * */
 	public List<Doctor> searchDoctors(String searchedName);
-
+	
 }

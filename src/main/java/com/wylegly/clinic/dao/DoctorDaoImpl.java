@@ -1,4 +1,4 @@
-package com.wylegly.clinic.data_layer;
+package com.wylegly.clinic.dao;
 
 import java.util.List;
 
@@ -7,7 +7,6 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.wylegly.clinic.domain.Doctor;
-import com.wylegly.clinic.domain.Patient;
 
 @Repository
 public class DoctorDaoImpl extends GenericDaoImpl<Doctor> implements DoctorDao {
@@ -30,22 +29,20 @@ public class DoctorDaoImpl extends GenericDaoImpl<Doctor> implements DoctorDao {
 		return query.getResultList();
 	}
 	
-//	@Override
-//	public Doctor get(int id) {
-//		
-//		Session session = currentSession();
-//		
-//		List<Patient> patients = session.createQuery(
-//				"select p " +
-//				"from Patient p " +
-//				"join fetch p.doctorInCharge " +
-//				"where p.id = :num", Patient.class)
-//			.setParameter("num", id)
-//			.list();
-//				
-//		System.out.println("Patients retrieved " + patients);
-//		return session.get(Doctor.class, id);
-//	}
-
+	@Override
+	public Doctor get(int id) {
+		
+		Session session = currentSession();
+		
+		// Left join fetch so associated entities can be
+		// loaded after closing session
+		Doctor doctor = session.createQuery("select doctor "
+				+ "from Doctor doctor "
+				+ "left join fetch doctor.patients "
+				+ "where doctor.id = :theId", Doctor.class)
+				.setParameter("theId", id)
+				.getSingleResult();
+		return doctor;
+	}
 
 }

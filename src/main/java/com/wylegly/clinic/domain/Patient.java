@@ -1,18 +1,21 @@
 package com.wylegly.clinic.domain;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 
 @Entity
 @DiscriminatorValue("patient")
 public class Patient extends Person{
 
-	@ManyToOne(fetch = FetchType.EAGER,
+	@ManyToOne(fetch = FetchType.LAZY,
 			cascade = {
 					CascadeType.MERGE,
 					CascadeType.PERSIST,
@@ -21,6 +24,9 @@ public class Patient extends Person{
 			})
 	@JoinColumn(name = "id_doctor_in_charge")
 	private Doctor doctorInCharge;
+	
+//	@OneToMany(fetch = FetchType.LAZY)
+//	private List<Prescription> prescriptions;
 	
 	public Patient() {
 		

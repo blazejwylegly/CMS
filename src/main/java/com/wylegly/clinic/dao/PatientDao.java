@@ -1,4 +1,4 @@
-package com.wylegly.clinic.data_layer;
+package com.wylegly.clinic.dao;
 
 
 import java.util.List;
@@ -15,4 +15,10 @@ public interface PatientDao extends GenericDao<Patient>{
 	public void patientSpecificMethod();
 
 	public List<Patient> searchPatients(String searchedName);
+	
+	@Override
+	public Patient get(int id);
+	
+	@Override
+	public List<Patient> getAll();
 }

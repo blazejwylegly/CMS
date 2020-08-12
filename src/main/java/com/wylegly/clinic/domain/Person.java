@@ -84,6 +84,10 @@ public abstract class Person {
 				+ ", surname=" + surname + ", firstName=" + firstName
 				+ ", secondName=" + secondName + "]";
 	}
+	
+	public String getFullName() {
+		return firstName + " " + surname;
+	}
 		
 	
 	

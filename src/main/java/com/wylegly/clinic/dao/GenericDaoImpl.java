@@ -1,4 +1,4 @@
-package com.wylegly.clinic.data_layer;
+package com.wylegly.clinic.dao;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -58,7 +58,7 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 		Session session = currentSession();
 		session.delete(session.get(daoType, id));
 		
-//		One may intend to override this using query for efficency:
+//		One may intend to override this using query for efficiency:
 //		Query query = currentSession().createQuery("delete from Person where id:=theId");
 //		query.setParameter("theId", id);
 //		query.executeUpdate();

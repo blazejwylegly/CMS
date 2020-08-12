@@ -1,6 +1,5 @@
 package com.wylegly.clinic.domain;
 
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,9 +10,9 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import javax.persistence.PreRemove;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 
 @Entity
 @DiscriminatorValue("doctor")
@@ -29,11 +28,9 @@ public class Doctor extends Person{
 	@Column(name = "work_end_at", columnDefinition = "TIME")
 	@Temporal(TemporalType.TIME)
 	private Date workEnd;
-	
-	
 
 	@OneToMany(mappedBy = "doctorInCharge",
-			fetch = FetchType.EAGER,
+			fetch = FetchType.LAZY,
 			cascade = {
 				CascadeType.MERGE,
 				CascadeType.PERSIST,
@@ -90,7 +87,12 @@ public class Doctor extends Person{
 				+ ", secondName=" + secondName + "]";
 	}
 
-
+	@PreRemove
+	public void onDeleteSetNull() {
+		for(Patient patient : patients) {
+			patient.setDoctorInCharge(null);
+		}
+	}
 
 	
 	

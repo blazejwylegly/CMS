@@ -1,4 +1,4 @@
-package com.wylegly.clinic.data_layer;
+package com.wylegly.clinic.dao;
 
 import java.util.List;
 

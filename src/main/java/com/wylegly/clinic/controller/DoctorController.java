@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wylegly.clinic.domain.Doctor;
-import com.wylegly.clinic.service_layer.DoctorService;
+import com.wylegly.clinic.service.DoctorService;
 
 @Controller
 @RequestMapping("/doctors")
@@ -56,7 +56,7 @@ public class DoctorController {
 		Doctor doctor = new Doctor();
 		model.addAttribute("doctor", doctor);
 		
-		return "doctor-add";
+		return "doctors-add";
 	}
 	
 	@PostMapping("/saveDoctor")
@@ -79,10 +79,9 @@ public class DoctorController {
 	public String showUpdateDoctorForm(
 			@RequestParam("doctorId") int id, Model model) {
 		Doctor doctor = doctorService.get(id);
-
 		model.addAttribute("doctor", doctor);
 		
-		return "doctor-add";
+		return "doctors-add";
 	}
 	
 	@GetMapping("/deleteDoctor")
@@ -97,20 +96,17 @@ public class DoctorController {
 	public String showDoctorDetailsForm(
 			@RequestParam("doctorId") int id, Model model) {
 		Doctor doctor = doctorService.get(id);
-		System.out.println(doctor);
-		System.out.println(doctor.getPatients());
 		model.addAttribute("doctor", doctor);
+		model.addAttribute("patients", doctor.getPatients());
 		
-		
-		return "doctor-details";
+		return "doctors-details";
 	}
 	
-//	
+//	@GetMapping("/showPatients")
+//	public String showDoctorsPatients(
+//			@RequestParam("doctorId") int id, Model model) {
+//		return "patients/list
+//	}
+	
 
-//	
-//
-//	type="text"
-//	class="time"
-//	name="workEnd"
-//	value= "<fmt:formatDate value="${cForm.dueDate}" pattern="MM-dd-yyyy" />"
 }

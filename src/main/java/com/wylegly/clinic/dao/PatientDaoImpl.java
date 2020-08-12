@@ -1,7 +1,9 @@
-package com.wylegly.clinic.data_layer;
+package com.wylegly.clinic.dao;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
@@ -36,6 +38,24 @@ public class PatientDaoImpl extends GenericDaoImpl<Patient> implements PatientDa
 		return query.getResultList();
 	}
 	
+	@Override
+	public Patient get(int id) {
+		Session session = currentSession();
+		Patient patient = session.get(Patient.class, id);
+		Hibernate.initialize(patient.getDoctorInCharge());
+		return patient;
+	}
 	
+	@Override
+	public List<Patient> getAll() {
+		List<Patient> patients = null;
+		Session session = currentSession();
+		
+		patients = session.createQuery("select patient " +
+			"from Patient patient " +
+			"left join fetch patient.doctorInCharge", Patient.class)
+			.getResultList();
+		return patients;
+	}
 	
 }

@@ -3,6 +3,7 @@ package com.wylegly.clinic.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wylegly.clinic.domain.Patient;
-import com.wylegly.clinic.service_layer.DoctorService;
-import com.wylegly.clinic.service_layer.PatientService;
+import com.wylegly.clinic.service.DoctorService;
+import com.wylegly.clinic.service.PatientService;
 
 @Controller
 @RequestMapping("/patients")
@@ -32,7 +33,7 @@ public class PatientController {
 
 		model.addAttribute("patients", patients);
 		
-		return "list-patients";
+		return "patients-list";
 	}
 	
 	@GetMapping("/addPatient")
@@ -42,20 +43,23 @@ public class PatientController {
 		model.addAttribute("patient", patient);
 		model.addAttribute("doctorList", doctorService.getAll());
 		
-		return "patient-add";
+		return "patients-add";
 	}
 	
 	@PostMapping("/savePatient")
 	public String savePatient(@ModelAttribute("patient") Patient patient,
 			BindingResult bindingResult) {
 		
-		Integer doctorInChargeId = Integer.parseInt(
-				(String)bindingResult.getFieldValue("doctorInCharge")
-				);
+		String doctorInChargeValue = (String)bindingResult.getFieldValue("doctorInCharge");
 		
-		if(doctorInChargeId != null) {
-			System.out.println(doctorInChargeId);
-			patient.setDoctorInCharge(doctorService.get(doctorInChargeId));
+		if(doctorInChargeValue != null && !doctorInChargeValue.trim().isEmpty()) {
+			
+			Integer doctorInChargeId = Integer.parseInt(doctorInChargeValue);
+			
+			if(doctorInChargeId != null) {
+				System.out.println(doctorInChargeId);
+				patient.setDoctorInCharge(doctorService.get(doctorInChargeId));
+			}
 		}
 		
 		patientService.saveOrUpdate(patient);
@@ -68,8 +72,10 @@ public class PatientController {
 		
 		Patient patient = patientService.get(patientId);
 		model.addAttribute("patient", patient);
+		model.addAttribute("doctorInCharge", patient.getDoctorInCharge());
+		model.addAttribute("doctorList", doctorService.getAll());
 		
-		return "patient-add";
+		return "patients-add";
 	}
 	
 	@GetMapping("/deletePatient")
@@ -87,7 +93,7 @@ public class PatientController {
 		
 		model.addAttribute("patients", patientsFound);
 		
-		return "list-patients";
+		return "patients-list";
 	}
 	
 	
