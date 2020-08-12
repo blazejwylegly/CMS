@@ -19,6 +19,8 @@
 		rel="stylesheet"
 		href="${pageContext.request.contextPath}/resources/css/add-patient-style.css">
 		
+		
+		
 </head>
 
 <body>
@@ -30,23 +32,28 @@
 			<hr> 
 			<h3>Doctor details</h3>
 			
-			<!-- Modify button -->
-			<form:form action="updateDoctor" method="GET">
-			
-				<input type="hidden" value=<%= request.getParameter("doctorId") %> name="doctorId"/>
-			
-				<input type="submit" value="Modify" class="add-button"/>
-			</form:form>
-			
-			<!-- Delete button -->
-			<form:form action="deleteDoctor" method="GET">
-				<input type="hidden" value=<%= request.getParameter("doctorId") %> name="doctorId"/>
-			
-				<input type="submit" value="Delete" class="add-button"
-				onclick="if (!(confirm('Are you sure you want to delete this doctor?'))) return false"/>
-			</form:form>
-	
-			
+			<div id="outer">
+				<div class="inner">
+					<!-- Modify button -->
+					<form:form action="updateDoctor" method="GET">
+					
+						<input type="hidden" value=<%= request.getParameter("doctorId") %> name="doctorId"/>
+					
+						<input type="submit" value="Modify" class="add-button"/>
+					</form:form>
+				</div>
+				
+				<div class="inner">
+					<!-- Delete button -->
+					<form:form action="deleteDoctor" method="GET">
+						<input type="hidden" value=<%= request.getParameter("doctorId") %> name="doctorId"/>
+					
+						<input type="submit" value="Delete" class="add-button"
+						onclick="if (!(confirm('Are you sure you want to delete this doctor?'))) return false"/>
+					</form:form>
+				</div>
+			</div>
+						
 			<!-- Personal details -->
 			First name: ${doctor.firstName}
 			<br>

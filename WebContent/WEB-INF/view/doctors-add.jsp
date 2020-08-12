@@ -13,7 +13,7 @@
 <head>
 	<meta charset="ISO-8859-1">
 	
-	<title>CMS - Add new doctor</title>
+	<title>CMS - Save doctor</title>
 	<link type="text/css"
 		rel = "stylesheet"
 		href="${pageContext.request.contextPath}/resources/css/style.css">
@@ -35,7 +35,7 @@
 	</div>
 	
 	<div id="container">
-		<h3>Add Doctor</h3>
+		<h3>Save Doctor</h3>
 		
 		<form:form action="saveDoctor" modelAttribute="doctor" method="POST">
 		
@@ -90,7 +90,7 @@
 					
 					<tr>
 						<td><label></label></td>
-						<td><input type="submit" value="Add" class="save"/></td>
+						<td><input type="submit" value="Save" class="save"/></td>
 					</tr>
 					
 				</tbody>

@@ -1,4 +1,4 @@
-package com.wylegly.clinic.service_layer;
+package com.wylegly.clinic.service;
 
 import java.util.List;
 

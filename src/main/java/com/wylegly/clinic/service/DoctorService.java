@@ -1,4 +1,4 @@
-package com.wylegly.clinic.service_layer;
+package com.wylegly.clinic.service;
 
 import java.util.List;
 
@@ -19,7 +19,4 @@ public interface DoctorService extends GenericService<Doctor>{
 	 * */
 	public List<Doctor> searchDoctors(String searchedName);
 	
-	@Override
-	public Doctor get(int id);
-
 }

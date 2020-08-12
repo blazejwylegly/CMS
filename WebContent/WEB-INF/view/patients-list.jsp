@@ -29,7 +29,8 @@
 	<div id="wrapper">
 		<div id="header">
 			<h2>CMS - Clinic Management System</h2>
-			
+			<br>
+			<h3>Patients registry</h3>
 			<br>
 			
 			<!-- Add button -->

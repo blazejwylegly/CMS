@@ -1,4 +1,4 @@
-package com.wylegly.clinic.service_layer;
+package com.wylegly.clinic.service;
 
 
 import java.util.List;
@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.wylegly.clinic.data_layer.GenericDao;
-import com.wylegly.clinic.data_layer.PatientDao;
+import com.wylegly.clinic.dao.GenericDao;
+import com.wylegly.clinic.dao.PatientDao;
 import com.wylegly.clinic.domain.Patient;
 
 @Service
@@ -30,21 +30,8 @@ public class PatientServiceImpl extends GenericServiceImpl<Patient> implements P
 
 	@Override
 	@Transactional
-	public void executePatientSpecificMethod() {
-		patientDao.patientSpecificMethod();
-	}
-
-	@Override
-	@Transactional
 	public List<Patient> searchPatients(String searchedName) {
 		return patientDao.searchPatients(searchedName);
 	}
-	
-	
-	/**
-	 * @TODO
-	 * Implement Patient - specific methods
-	 * */
-	
 	
 }

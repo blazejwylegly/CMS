@@ -1,4 +1,4 @@
-package com.wylegly.clinic.data_layer;
+package com.wylegly.clinic.dao;
 
 import java.util.List;
 
@@ -10,10 +10,4 @@ public interface DoctorDao extends GenericDao<Doctor>{
 	
 	@Override
 	public Doctor get(int id);
-	
-//	@Override
-//	public void delete(Doctor obj);
-//	
-//	@Override
-//	public void deleteWithId(int id);
 }

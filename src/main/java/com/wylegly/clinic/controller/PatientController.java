@@ -3,6 +3,7 @@ package com.wylegly.clinic.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wylegly.clinic.domain.Patient;
-import com.wylegly.clinic.service_layer.DoctorService;
-import com.wylegly.clinic.service_layer.PatientService;
+import com.wylegly.clinic.service.DoctorService;
+import com.wylegly.clinic.service.PatientService;
 
 @Controller
 @RequestMapping("/patients")

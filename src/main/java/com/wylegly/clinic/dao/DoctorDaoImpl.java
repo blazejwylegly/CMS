@@ -1,8 +1,7 @@
-package com.wylegly.clinic.data_layer;
+package com.wylegly.clinic.dao;
 
 import java.util.List;
 
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
@@ -35,23 +34,15 @@ public class DoctorDaoImpl extends GenericDaoImpl<Doctor> implements DoctorDao {
 		
 		Session session = currentSession();
 		
-		Doctor doctor = session.get(Doctor.class, id);
-		
-		Hibernate.initialize(doctor.getPatients());
+		// Left join fetch so associated entities can be
+		// loaded after closing session
+		Doctor doctor = session.createQuery("select doctor "
+				+ "from Doctor doctor "
+				+ "left join fetch doctor.patients "
+				+ "where doctor.id = :theId", Doctor.class)
+				.setParameter("theId", id)
+				.getSingleResult();
 		return doctor;
 	}
-	
-//	@Override
-//	public void delete(Doctor obj) {
-//		// TODO Auto-generated method stub
-//		super.delete(obj);
-//	}
-//	
-//	@Override
-//	public void deleteWithId(int id) {
-//		// TODO Auto-generated method stub
-//		super.deleteWithId(id);
-//	}
-
 
 }

@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wylegly.clinic.domain.Doctor;
-import com.wylegly.clinic.service_layer.DoctorService;
+import com.wylegly.clinic.service.DoctorService;
 
 @Controller
 @RequestMapping("/doctors")
