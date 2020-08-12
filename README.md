@@ -13,6 +13,6 @@ Technologies used:
 - CSS
 
 Main purpose of this project, was to learn Spring and Hibernate, therefore
-there are only basic CSS and HTML elements.
+for now there are only basic CSS and HTML elements.
 
 Project is still under development.
