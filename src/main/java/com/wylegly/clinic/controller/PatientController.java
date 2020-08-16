@@ -3,7 +3,6 @@ package com.wylegly.clinic.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,79 +24,73 @@ public class PatientController {
 	private PatientService patientService;
 	@Autowired
 	private DoctorService doctorService;
-	
+
 	@GetMapping("/list")
 	public String listPatients(Model model) {
-		
+
 		List<Patient> patients = patientService.getAll();
 
 		model.addAttribute("patients", patients);
-		
-		return "patients-list";
+
+		return "patients-list-new";
 	}
-	
+
 	@GetMapping("/addPatient")
 	public String showAddPatientForm(Model model) {
 		Patient patient = new Patient();
-		
+
 		model.addAttribute("patient", patient);
 		model.addAttribute("doctorList", doctorService.getAll());
-		
+
 		return "patients-add";
 	}
-	
+
 	@PostMapping("/savePatient")
-	public String savePatient(@ModelAttribute("patient") Patient patient,
-			BindingResult bindingResult) {
-		
-		String doctorInChargeValue = (String)bindingResult.getFieldValue("doctorInCharge");
-		
-		if(doctorInChargeValue != null && !doctorInChargeValue.trim().isEmpty()) {
-			
+	public String savePatient(@ModelAttribute("patient") Patient patient, BindingResult bindingResult) {
+
+		String doctorInChargeValue = (String) bindingResult.getFieldValue("doctorInCharge");
+
+		if (doctorInChargeValue != null && !doctorInChargeValue.trim().isEmpty()) {
+
 			Integer doctorInChargeId = Integer.parseInt(doctorInChargeValue);
-			
-			if(doctorInChargeId != null) {
+
+			if (doctorInChargeId != null) {
 				System.out.println(doctorInChargeId);
 				patient.setDoctorInCharge(doctorService.get(doctorInChargeId));
 			}
 		}
-		
+
 		patientService.saveOrUpdate(patient);
 		return "redirect:/patients/list";
 	}
-	
+
 	@GetMapping("/updatePatient")
-	public String showUpdatePatientForm(
-			@RequestParam("patientId")int patientId, Model model) {
-		
+	public String showUpdatePatientForm(@RequestParam("patientId") int patientId, Model model) {
+
 		Patient patient = patientService.get(patientId);
 		model.addAttribute("patient", patient);
 		model.addAttribute("doctorInCharge", patient.getDoctorInCharge());
 		model.addAttribute("doctorList", doctorService.getAll());
-		
+
 		return "patients-add";
 	}
-	
+
 	@GetMapping("/deletePatient")
-	public String showDeletePatientForm(
-			@RequestParam("patientId")int patientId){
+	public String showDeletePatientForm(@RequestParam("patientId") int patientId) {
 		patientService.remove(patientId);
 		return "redirect:/patients/list";
 	}
-	
+
 	@GetMapping("/searchPatient")
-	public String showSearchPatientForm(
-			@RequestParam("searchedName")String searchedName, Model model) {
-		
+	public String showSearchPatientForm(@RequestParam("searchedName") String searchedName, Model model) {
+
 		List<Patient> patientsFound = patientService.searchPatients(searchedName);
-		
+
 		model.addAttribute("patients", patientsFound);
-		
+
 		return "patients-list";
 	}
-	
-	
+
 	// COMMENT FOR COMMIT TEST POURPOSES - MASTER
 
-	
 }

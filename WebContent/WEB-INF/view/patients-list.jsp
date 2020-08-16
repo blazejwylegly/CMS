@@ -26,6 +26,8 @@
 </head>
 <body>
 
+	<jsp:include page="${contextPath.request.contextPath}/WEB-INF/view/components/navigation-bar.jsp"></jsp:include>
+
 	<div id="wrapper">
 		<div id="header">
 			<h2>CMS - Clinic Management System</h2>

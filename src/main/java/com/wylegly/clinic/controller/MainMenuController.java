@@ -14,39 +14,37 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/")
 public class MainMenuController {
-	
-	
+
 	@GetMapping(value = "/home")
 	public String main(Locale locale, Model model) {
 		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG,
-				DateFormat.LONG, locale);
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		System.out.println(dateFormat.format(date));
 		model.addAttribute("serverTime", dateFormat.format(date));
 		return "home";
-	
+
 	}
-	
-//	
-//	@RequestMapping(value = "/", method = RequestMethod.GET)
-//	public String main(Locale locale, Model model) {
-//		System.out.println("Main page requested, locale = " + locale);
-//		Date date = new Date();
-//		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG,
-//				DateFormat.LONG, locale);
-//		
-//		String formattedDate = dateFormat.format(date);
-//		model.addAttribute("serverTime", formattedDate);
-//		
-//		return "main";
-//	}
-	
+
+	//
+	// @RequestMapping(value = "/", method = RequestMethod.GET)
+	// public String main(Locale locale, Model model) {
+	// System.out.println("Main page requested, locale = " + locale);
+	// Date date = new Date();
+	// DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG,
+	// DateFormat.LONG, locale);
+	//
+	// String formattedDate = dateFormat.format(date);
+	// model.addAttribute("serverTime", formattedDate);
+	//
+	// return "main";
+	// }
+
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
-	public String user(@RequestParam("username") String username,
-			@RequestParam("userPassword") String password, Model model) {
-		 
+	public String user(@RequestParam("username") String username, @RequestParam("userPassword") String password,
+			Model model) {
+
 		System.out.println("User page requested");
-		//model.addAttribute("userFirstName", user.getFirstName());
+		// model.addAttribute("userFirstName", user.getFirstName());
 		model.addAttribute("username", username);
 		return "user";
 	}
