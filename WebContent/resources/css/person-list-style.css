@@ -1,3 +1,4 @@
+/* Configure person table */
 table.person-list {
   border-collapse: collapse;
   border-spacing: 0px;
@@ -33,13 +34,32 @@ td {
   padding: 20px;
 }
 
+/* Configure action buttons displayed on list */
+
 .action-buttons {
   text-decoration: none;
   font-size: 24px;
 }
 
-.action-buttons a {
+div.action-buttons a {
   text-decoration: none;
   padding-left: 10px;
   padding-right: 10px;
+  color: #222222;
 }
+
+div.search-bar input[type="text"] {
+  width: 40%;
+  height: 16px;
+  padding: 12px;
+  background-color: floralwhite;
+  margin: 20px;
+
+  border-radius: 12px;
+}
+
+div.search-bar input[type="text"]:focus {
+  border: 3px solid #555;
+}
+
+/* Configure add button */

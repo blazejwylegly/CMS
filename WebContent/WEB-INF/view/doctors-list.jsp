@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
 prefix="c" %> <%@ taglib prefix="form"
-uri="http://www.springframework.org/tags/form" %>
+uri="http://www.springframework.org/tags/form" %> <%@ page
+import="com.wylegly.clinic.domain.Person" %> <%@ page
+import="com.wylegly.clinic.domain.Doctor" %>
 
 <!DOCTYPE html>
 <html>
@@ -29,7 +31,6 @@ uri="http://www.springframework.org/tags/form" %>
     <title>Doctors list</title>
   </head>
   <body>
-    
     <!-- Include navigation bar -->
     <jsp:include
       page="${contextPath.request.contextPath}/WEB-INF/view/components/navigation-bar.jsp"
@@ -44,12 +45,21 @@ uri="http://www.springframework.org/tags/form" %>
         class="add-button"
       />
       <br /><br />
-
-      <!-- Search doctor bar -->
-      <form:form action="searchDoctor" method="GET">
-        Search doctor: <input type="text" name="searchedName" />
-        <input type="submit" value="Search" class="add-button" />
-      </form:form>
+      <div class="search-bar">
+        <!-- Search doctor bar -->
+        <form:form action="searchDoctor" method="GET">
+          <!-- Input bar -->
+          <input
+            type="text"
+            name="searchedName"
+            placeholder="Search for doctor..."
+          />
+          <!-- Button -->
+          <button type="submit" value="search" class="add-button">
+            <i class="fas fa-search"></i>
+          </button>
+        </form:form>
+      </div>
 
       <!-- Table (list) of doctors -->
       <table class="person-list">
@@ -62,51 +72,57 @@ uri="http://www.springframework.org/tags/form" %>
           <th>Action</th>
         </tr>
 
-        
-          <c:forEach var="tempDoctor" items="${doctors}">
-            <!-- Update link -->
-            <c:url var="updateLink" value="/doctors/updateDoctor">
-              <c:param name="doctorId" value="${tempDoctor.id}" />
-            </c:url>
+        <c:forEach var="tempDoctor" items="${doctors}">
+          <!-- Update link -->
+          <c:url var="updateLink" value="/doctors/updateDoctor">
+            <c:param name="doctorId" value="${tempDoctor.id}" />
+          </c:url>
 
-            <!-- Delete link -->
-            <c:url var="deleteLink" value="/doctors/deleteDoctor">
-              <c:param name="doctorId" value="${tempDoctor.id}" />
-            </c:url>
+          <!-- Delete link -->
+          <c:url var="deleteLink" value="/doctors/deleteDoctor">
+            <c:param name="doctorId" value="${tempDoctor.id}" />
+          </c:url>
 
-            <!-- Details link -->
-            <c:url var="detailsLink" value="/doctors/details">
-              <c:param name="doctorId" value="${tempDoctor.id}" />
-            </c:url>
+          <!-- Details link -->
+          <c:url var="detailsLink" value="/doctors/details">
+            <c:param name="doctorId" value="${tempDoctor.id}" />
+          </c:url>
 
-            <tr>
-              <td>${tempDoctor.fullName}</td>
-              <td>${tempDoctor.pesel}</td>
-              <td>${tempDoctor.childrenDoctor}</td>
-              <td>${tempDoctor.workStart}</td>
-              <td>${tempDoctor.workEnd}</td>
+          <!-- Retrieve doctor for convenience of use -->
+          <% Doctor currentDoctor =
+          (Doctor)pageContext.getAttribute("tempDoctor"); %>
 
-              <!-- Display update, update, details links -->
-              <td>
-                <div class="action-buttons">
-                  <a href="${updateLink}">
-                    <i id="person-edit-button" class="fas fa-user-edit 2x"></i>
-                  </a>
-                  <a
-                    href="${deleteLink}"
-                    onclick="if (!(confirm('Are you sure you want to delete this doctor?'))) return false"
-                  >
-                    <i id="person-delete-button" class="fas fa-user-times"></i>
-                  </a>
+          <tr>
+            <td>${tempDoctor.fullName}</td>
+            <td>${tempDoctor.pesel}</td>
+            <td>
+              <% if (currentDoctor.getChildrenDoctor()) { %>
+              <i style="color: green;" class="fas fa-check"></i>
+              <% } else { %>
+              <i style="color: red;" class="fas fa-times"></i>
+              <% } %>
+            </td>
+            <td>${tempDoctor.workStart}</td>
+            <td>${tempDoctor.workEnd}</td>
 
-                  <a href="${detailsLink}">
-                    <i id="person-detail-button" class="fas fa-info-circle"></i
-                  ></a>
-                </div>
-              </td>
-            </tr>
-          </c:forEach>
-        </tr>
+            <!-- Display update, update, details links -->
+            <td>
+              <div class="action-buttons">
+                <a href="${updateLink}">
+                  <i class="fas fa-user-edit"></i>
+                </a>
+                <a
+                  href="${deleteLink}"
+                  onclick="if (!(confirm('Are you sure you want to delete this doctor?'))) return false"
+                >
+                  <i class="fas fa-user-times"></i>
+                </a>
+
+                <a href="${detailsLink}"> <i class="fas fa-info-circle"></i></a>
+              </div>
+            </td>
+          </tr>
+        </c:forEach>
       </table>
     </div>
 

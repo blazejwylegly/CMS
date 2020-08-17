@@ -13,15 +13,13 @@
 <html>
 <head>
 
-<!-- Add reference to css -->
-<link type="text/css" 
-	rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/style.css"/>
-<meta charset="ISO-8859-1">
-
-
-<title>Patients list</title>
-
+	<!-- Add reference to css -->
+	<link type="text/css" 
+		rel="stylesheet"
+		href="${pageContext.request.contextPath}/resources/css/style.css"/>
+	<meta charset="ISO-8859-1">
+	
+	<title>Patients list</title>
 
 </head>
 <body>

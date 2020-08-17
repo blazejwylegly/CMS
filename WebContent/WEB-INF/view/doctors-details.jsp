@@ -20,6 +20,11 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       rel="stylesheet"
       href="${pageContext.request.contextPath}/resources/css/add-patient-style.css"
     />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
