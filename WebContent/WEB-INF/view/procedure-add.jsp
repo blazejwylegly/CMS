@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%> <%@taglib uri="http://java.sun.com/jsp/jstl/core"
-prefix="c"%>
-
+pageEncoding="ISO-8859-1"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
+prefix="c" %> <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="ISO-8859-1" />
-    <title>CMS - Home page</title>
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <title>Procedures overview</title>
+
     <link
       rel="stylesheet"
       href="${pageContext.request.contextPath}/resources/css/style.css"
@@ -21,7 +21,9 @@ prefix="c"%>
   <body>
     <jsp:include
       page="${contextPath.request.contextPath}/WEB-INF/view/components/navigation-bar.jsp"
-    ></jsp:include>
-    <div class="home-bg"></div>
+    />
+    <br />
+    <br />
+    Welcome to procedures tab
   </body>
 </html>

@@ -18,27 +18,30 @@ prefix="c" %> <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
     <link
       type="text/css"
       rel="stylesheet"
-      href="${pageContext.request.contextPath}/resources/css/add-patient-style.css"
+      href="${pageContext.request.contextPath}/resources/css/add-person-style.css"
+    />
+
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="${pageContext.request.contextPath}/resources/css/default-elements.css"
+    />
+    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap"
+      rel="stylesheet"
     />
   </head>
 
   <body>
     <jsp:include
-      page="${contextPath.request.contextPath}/WEB-INF/view/components/navigation-bar.jsp">
-    </jsp:include>
+      page="${contextPath.request.contextPath}/WEB-INF/view/components/navigation-bar.jsp"
+    />
 
-    <div id="wrapper">
-      <div id="header">
-        <h2>CMS - Clinic Management System</h2>
-      </div>
-    </div>
-
-    <div id="container">
-      <h3>Save Doctor</h3>
-
+    <div class="person-add-wrapper">
       <form:form action="saveDoctor" modelAttribute="doctor" method="POST">
         <form:hidden path="id" />
-        <table>
+        <table class="input-list">
           <tbody>
             <tr>
               <td><label>First name:</label></td>
@@ -78,23 +81,23 @@ prefix="c" %> <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
             <tr>
               <td><label>Children doctor:</label></td>
-              <td><form:checkbox path="childrenDoctor" /></td>
+              <td>
+                <label class="checkbox-wrapper">
+                  <!-- Hiding default checkbox element -->
+                  <form:checkbox path="childrenDoctor" />
+                  <!-- Showing custom styled element -->
+                  <span class="checkbox-custom"></span>
+                </label>
+              </td>
             </tr>
 
             <tr>
               <td><label></label></td>
-              <td><input type="submit" value="Save" class="save" /></td>
+              <td><input type="submit" value="Save" class="styled-button" /></td>
             </tr>
           </tbody>
         </table>
       </form:form>
-
-      <div style="clear; both;"></div>
-      <p>
-        <a href="${pageContext.request.contextPath}/doctors/list"
-          >Back to doctors list</a
-        >
-      </p>
     </div>
   </body>
 </html>

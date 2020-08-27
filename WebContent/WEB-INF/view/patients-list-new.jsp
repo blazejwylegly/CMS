@@ -16,38 +16,72 @@
 
   <!-- Add reference to css -->
   <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" />
-  <meta charset="ISO-8859-1">
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="${pageContext.request.contextPath}/resources/css/person-list-style.css"
+    />
 
+    <link 
+	    type="text/css" 
+	    rel="stylesheet" 
+	    href="${pageContext.request.contextPath}/resources/css/default-elements.css" 
+    />
 
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap"
+      rel="stylesheet"
+    />
   <title>Patients list</title>
-
 
 </head>
 
-<body>
+  <body>
 
   <jsp:include page="${contextPath.request.contextPath}/WEB-INF/view/components/navigation-bar.jsp"></jsp:include>
   
-  <div id="wrapper">
-    <div id="header">
-      <h2>CMS - Clinic Management System</h2>
+  <div class="container">
+    
       <br>
-      <h3>Patients registry</h3>
-      <br>
-
-      <!-- Add button -->
-      <input type="button" value="Add Patient" onclick="window.location.href ='addPatient'; return false;"
-        class="add-button" />
-
+<div class="person-list-wrapper">
       <!-- Search bar -->
-      <form:form action="searchPatient" method="GET">
-        Search patient: <input type="text" name="searchedName" />
-        <input type="submit" value="Search" class="add-button" />
-      </form:form>
+      <div class="search-bar">
 
+        <form:form action="searchPatient" method="GET">
+
+          <!-- Input bar -->
+          <input 
+            type="text"
+            name="searchedName"
+            class="styled-input"
+            placeholder="Search for patient..." 
+          />
+
+           <!-- Search button -->
+          <button type="submit" value="search" class="styled-button">
+            <i class="fas fa-search"></i>
+          </button>
+
+        </form:form>
+
+        <!-- Add button -->
+        <input 
+          type="button" 
+          value="Add Patient" 
+          onclick="window.location.href ='addPatient'; return false;"
+          class="styled-button"
+          class="align-left"
+         />
+          
+      </div>
 
       <!-- Table (list) of patients -->
-      <table>
+      <table class="person-list">
 
         <!-- Table headers -->
         <tr>
@@ -94,10 +128,14 @@
           </td>
           <!-- Display update and delete links -->
           <td>
-            <a href="${updateLink}">Update</a>
-            |
-            <a href="${deleteLink}"
-              onclick="if (!(confirm('Are you sure you want to delete this patient?'))) return false">Delete</a>
+            <div class="action-buttons">
+              <a href="${updateLink}">
+                <i class="fas fa-user-edit"></i>
+              </a>
+              <a href="${deleteLink}" onclick="if (!(confirm('Are you sure you want to delete this patient?'))) return false">
+                <i class="fas fa-user-times"></i>
+              </a>
+			</div>
           </td>
         </tr>
         </c:forEach>
@@ -111,7 +149,5 @@
     <a href="${pageContext.request.contextPath}/home">Back to home page</a>
   </p>
 
-
-</body>
-
+  </body>
 </html>

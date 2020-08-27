@@ -1,0 +1,67 @@
+.person-add-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-items: flex-start;
+  margin: 0 auto;
+  width: 80%;
+  border: 0;
+  padding: 0;
+}
+
+.input-list {
+  border-spacing: 0;
+  width: 100%;
+  padding: 1.5rem;
+}
+
+.input-list tbody {
+  padding: 10px;
+}
+
+.input-list th,
+td {
+  background: #e5e5e5;
+  padding: 10px;
+  margin: 10px;
+}
+
+.styled-input,
+.input-list input[type="text"],
+textarea {
+  /* Set transition for every browser 
+  transition-property | transition-duration | -transition-timing-function | transition-delay */
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+
+  /* outline is a line drawn around elements, OUTSIDE borders */
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #dddddd;
+
+  display: block;
+  border-radius: 6px;
+  background: #f8f8f8;
+
+  width: 80%;
+  height: 26px;
+
+  font-family: "Montserrat", sans-serif;
+  font-weight: bolder;
+  letter-spacing: 1.5px;
+}
+
+.styled-input,
+.input-list input[type="text"]:focus,
+textarea:focus,
+select:focus {
+  /* Attaches shadow to elements */
+  /* box-shadow: none|h-offset v-offset blur spread color |inset|initial|inherit */
+
+  box-shadow: 0 0 5px #00b8a5;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #00b8a5;
+}

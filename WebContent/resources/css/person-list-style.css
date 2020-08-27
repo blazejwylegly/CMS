@@ -3,21 +3,43 @@ table.person-list {
   border-collapse: collapse;
   border-spacing: 0px;
   background: #ddd;
-  width: 80%;
   padding: 25px;
 
-  border: 2em solid #8caccf;
+  border: 2px solid #ddd;
   margin: 0 auto;
 
   text-transform: uppercase;
   text-align: center;
 
   font-size: 14px;
-  font-weight: bolder;
-
-  color: #222222;
 }
 
+.person-list-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-items: flex-start;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.person-list-wrapper table.person-list {
+  align-self: stretch;
+}
+
+.search-bar {
+  display: flex;
+  border-collapse: collapse;
+  float: left;
+  margin: 0 auto;
+}
+
+.align-left {
+  margin-left: auto;
+}
+
+.person-list tr:first-child {
+  background: #ebfffd;
+}
 .person-list tr:nth-child(odd) {
   background: #f8f8f8;
 }
@@ -48,18 +70,4 @@ div.action-buttons a {
   color: #222222;
 }
 
-div.search-bar input[type="text"] {
-  width: 40%;
-  height: 16px;
-  padding: 12px;
-  background-color: floralwhite;
-  margin: 20px;
-
-  border-radius: 12px;
-}
-
-div.search-bar input[type="text"]:focus {
-  border: 3px solid #555;
-}
-
-/* Configure add button */
+/* Configure checkbox */

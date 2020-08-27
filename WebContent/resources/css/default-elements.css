@@ -1,0 +1,168 @@
+.checkbox-wrapper {
+  display: inline-block;
+  position: relative;
+  margin: auto;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 24px;
+  height: 24px;
+  width: 24px;
+  clear: both;
+}
+
+.checkbox-wrapper input {
+  position: absolute;
+  /* Display: none and Visibility: Hidden
+  turn of any event listeners on the item */
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Styling custom checkbox for unchecked state */
+.checkbox-wrapper .checkbox-custom {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 24px;
+  width: 24px;
+  background-color: transparent;
+  border-radius: 5px;
+  border: 2px solid #222;
+
+  /* Add transition animation when the state changes */
+  transition: all 0.4s ease-out;
+  -webkit-transition: all 0.4s ease-out;
+  -moz-transition: all 0.4s ease-out;
+  -ms-transition: all 0.4s ease-out;
+  -o-transition: all 0.4s ease-out;
+}
+
+.checkbox-wrapper .checkbox-custom::after {
+  position: absolute;
+  content: "";
+  left: 12px;
+  top: 12px;
+  height: 0px;
+  border-radius: 5px;
+  border: solid #00b8a5;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(0deg) scale(0);
+  -ms-transform: rotate(0deg) scale(0);
+  transform: rotate(0deg) scale(0);
+  opacity: 1;
+
+  /* Add transition animation when the state changes */
+  transition: all 0.4s ease-out;
+  -webkit-transition: all 0.4s ease-out;
+  -moz-transition: all 0.4s ease-out;
+  -ms-transition: all 0.4s ease-out;
+  -o-transition: all 0.4s ease-out;
+}
+
+/* Styling custom checkbox for checked state */
+.checkbox-wrapper input:checked ~ .checkbox-custom {
+  -webkit-transform: rotate(0deg) scale(1);
+  -ms-transform: rotate(0deg) scale(1);
+  transform: rotate(0deg) scale(1);
+
+  background-color: #00b8a5;
+  border-radius: 5px;
+  border: solid #00b8a5;
+
+  opacity: 1;
+}
+
+.checkbox-wrapper input:checked ~ .checkbox-custom::after {
+  -webkit-transform: rotate(45deg) scale(1);
+  -ms-transform: rotate(45deg) scale(1);
+  transform: rotate(45deg) scale(1);
+
+  border-radius: 5px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  background-color: transparent;
+  border-radius: 0;
+  opacity: 1;
+
+  left: 8px;
+  top: 3px;
+  width: 6px;
+  height: 12px;
+}
+
+/* Add ripple effect for checkbox */
+.checkbox-wrapper .checkbox-custom::before {
+  position: absolute;
+  content: "";
+  left: 10px;
+  top: 10px;
+  width: 0px;
+  height: 0px;
+  border-radius: 5px;
+  border: 1.5px solid #00b8a5;
+
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+}
+
+.checkbox-wrapper input:checked ~ .checkbox-custom::before {
+  left: -3px;
+  top: -3px;
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
+
+  -webkit-transform: scale(2);
+  -ms-transform: scale(2);
+  transform: scale(2);
+
+  opacity: 0;
+  z-index: 999;
+
+  transition: all 0.4s ease-out;
+  -webkit-transition: all 0.4s ease-out;
+  -moz-transition: all 0.4s ease-out;
+  -ms-transition: all 0.4s ease-out;
+  -o-transition: all 0.4s ease-out;
+}
+
+/* DEFAULT INPUT STYLING */
+
+.styled-input,
+textarea {
+  /* Set transition for every browser 
+  transition-property | transition-duration | -transition-timing-function | transition-delay */
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+
+  /* outline is a line drawn around elements, OUTSIDE borders */
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #dddddd;
+
+  display: block;
+  border-radius: 6px;
+  background: #f8f8f8;
+
+  width: 80%;
+  height: 26px;
+
+  font-family: "Montserrat", sans-serif;
+  font-weight: bolder;
+  letter-spacing: 1.5px;
+}
+
+.styled-input:focus, textarea:focus,
+select:focus {
+  /* Attaches shadow to elements */
+  /* box-shadow: none|h-offset v-offset blur spread color |inset|initial|inherit */
+
+  box-shadow: 0 0 5px #00b8a5;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #00b8a5;
+}

@@ -17,10 +17,10 @@
       </li>
       <li>
         <a href="${pageContext.request.contextPath}/doctors/list">
-          Doctor
+          Doctors
         </a>
       </li>
-      <li><a href="#">Procedures</a></li>
+      <li><a href="${pageContext.request.contextPath}/procedures/overview">Procedures</a></li>
     </ul>
 
     <!-- Display burger icon -->

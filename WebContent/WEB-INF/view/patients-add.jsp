@@ -20,30 +20,28 @@ uri="http://www.springframework.org/tags/form" %>
     <link
       type="text/css"
       rel="stylesheet"
-      href="${pageContext.request.contextPath}/resources/css/add-patient-style.css"
+      href="${pageContext.request.contextPath}/resources/css/add-person-style.css"
+    />
+    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap"
+      rel="stylesheet"
     />
   </head>
 
   <body>
+    <!-- Include navigation bar -->
     <jsp:include
       page="${contextPath.request.contextPath}/WEB-INF/view/components/navigation-bar.jsp"
     ></jsp:include>
 
-    <div id="wrapper">
-      <div id="header">
-        <h2>CMS - Clinic Management System</h2>
-      </div>
-    </div>
-
-    <div id="container">
-      <h3>Save Patient</h3>
-
+    <div class="person-add-wrapper">
       <form:form action="savePatient" modelAttribute="patient" method="POST">
         <!-- Retrieve doctor in charge to display id -->
         <% Patient patient = (Patient)request.getAttribute("patient"); Doctor
         doctorInCharge = patient.getDoctorInCharge(); %>
         <form:hidden path="id" />
-        <table>
+        <table class="input-list">
           <tbody>
             <tr>
               <td><label>First name:</label></td>
@@ -85,7 +83,9 @@ uri="http://www.springframework.org/tags/form" %>
 
             <tr>
               <td><label></label></td>
-              <td><input type="submit" value="Save" class="save" /></td>
+              <td>
+                <input type="submit" value="Save" class="styled-button" />
+              </td>
             </tr>
           </tbody>
         </table>
