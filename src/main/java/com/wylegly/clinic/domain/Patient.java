@@ -25,8 +25,16 @@ public class Patient extends Person{
 	@JoinColumn(name = "id_doctor_in_charge")
 	private Doctor doctorInCharge;
 	
-//	@OneToMany(fetch = FetchType.LAZY)
-//	private List<Prescription> prescriptions;
+	@OneToMany(
+			mappedBy = "patient",
+			fetch = FetchType.LAZY,
+			cascade = {
+					CascadeType.MERGE,
+					CascadeType.PERSIST,
+					CascadeType.REFRESH,
+					CascadeType.DETACH
+			})
+	private List<DentalProcedure> procedures;
 	
 	public Patient() {
 		

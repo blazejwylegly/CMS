@@ -39,6 +39,16 @@ public class Doctor extends Person{
 			})
 	private List<Patient> patients;
 	
+	@OneToMany(mappedBy = "doctor",
+			fetch = FetchType.LAZY,
+			cascade = {
+				CascadeType.MERGE,
+				CascadeType.PERSIST,
+				CascadeType.REFRESH,
+				CascadeType.DETACH
+			})
+	private List<DentalProcedure> procedures;
+	
 	public Doctor() {
 		
 	}
