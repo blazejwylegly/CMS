@@ -20,7 +20,7 @@
           Doctors
         </a>
       </li>
-      <li><a href="${pageContext.request.contextPath}/procedures/overview">Procedures</a></li>
+      <li><a href="${pageContext.request.contextPath}/procedures/list">Procedures</a></li>
     </ul>
 
     <!-- Display burger icon -->

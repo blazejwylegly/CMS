@@ -37,6 +37,9 @@ table.person-list {
   margin-left: auto;
 }
 
+.person-list tr {
+}
+
 .person-list tr:first-child {
   background: #ebfffd;
 }

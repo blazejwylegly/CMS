@@ -28,8 +28,9 @@ prefix="c" %> <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
     />
     
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap"
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap"
+      
     />
   </head>
 

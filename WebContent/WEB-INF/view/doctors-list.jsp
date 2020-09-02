@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
-prefix="c" %> <%@ taglib prefix="form"
-uri="http://www.springframework.org/tags/form" %> <%@ page
-import="com.wylegly.clinic.domain.Person" %> <%@ page
+pageEncoding="ISO-8859-1"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
+prefix="c" %> 
+<%@ taglib prefix="form"
+uri="http://www.springframework.org/tags/form" %> 
+<%@ page
+import="com.wylegly.clinic.domain.Person" %> 
+<%@ page
 import="com.wylegly.clinic.domain.Doctor" %>
 
 <!DOCTYPE html>
@@ -48,7 +52,7 @@ import="com.wylegly.clinic.domain.Doctor" %>
     ></jsp:include>
 
     <div class="container">
-      <br />
+     
       <div class="person-list-wrapper">
         <!-- Search doctor bar -->
         <div class="search-bar">
@@ -108,7 +112,7 @@ import="com.wylegly.clinic.domain.Doctor" %>
             (Doctor)pageContext.getAttribute("tempDoctor"); %>
 
             <tr>
-              <td>${tempDoctor.fullName}</td>
+              <td>${tempDoctor.fullName}</td 
               <td>${tempDoctor.pesel}</td>
               <td>
                 <% if (currentDoctor.getChildrenDoctor()) { %>
