@@ -6,7 +6,7 @@
  @Aspect
  public final class PointcutDeclarations {
 	
- 	@Pointcut("execution(* com.wylegly.clinic.controller.*.*(..))")
+ 	@Pointcut("execution(* com.wylegly.clinic.*.*.*(..))")
  	public void forControllerPackage() {}
 	
  	@Pointcut("execution(* com.wylegly.clinic.service.*.*(..))")

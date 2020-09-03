@@ -112,7 +112,7 @@ import="com.wylegly.clinic.domain.Doctor" %>
             (Doctor)pageContext.getAttribute("tempDoctor"); %>
 
             <tr>
-              <td>${tempDoctor.fullName}</td 
+              <td>${tempDoctor.fullName}</td>
               <td>${tempDoctor.pesel}</td>
               <td>
                 <% if (currentDoctor.getChildrenDoctor()) { %>

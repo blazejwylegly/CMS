@@ -1,3 +1,6 @@
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
+prefix="c" %> 
+
 <div class="nav-bar">
   <nav>
     <!-- Display logo -->
@@ -20,7 +23,14 @@
           Doctors
         </a>
       </li>
-      <li><a href="${pageContext.request.contextPath}/procedures/list">Procedures</a></li>
+      <li>
+        <a href="${pageContext.request.contextPath}/procedures/list"
+          >Procedures
+        </a>
+      </li>
+      <li>
+        <a href="<c:url value="/logout" />">Logout</a>
+      </li>
     </ul>
 
     <!-- Display burger icon -->

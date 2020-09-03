@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%> <%@taglib uri="http://java.sun.com/jsp/jstl/core"
-prefix="c"%>
+pageEncoding="ISO-8859-1"%> 
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -22,6 +23,14 @@ prefix="c"%>
     <jsp:include
       page="${contextPath.request.contextPath}/WEB-INF/view/components/navigation-bar.jsp"
     ></jsp:include>
+    <p>
+   	 	Welcome <security:authentication property="principal.username"/>
+    </p>
+    
+    <p>
+    	Role(s) assigned: <security:authentication property="principal.authorities"/>
+    </p>
+    <!-- Display user ID and user authorities -->
     <div class="home-bg"></div>
   </body>
 </html>
