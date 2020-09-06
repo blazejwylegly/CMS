@@ -27,18 +27,10 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 	@SuppressWarnings("unchecked")
 	public GenericDaoImpl() {
 		
-		/**
-		 * @TODO!!!
-		 * RE-WRITE USING AOP
-		 * */
 		Type t = getClass().getGenericSuperclass();
-		System.out.println("Type: " + t);
-		
 		ParameterizedType pt = (ParameterizedType) t;
-		System.out.println("Pt: " + pt);
 		
 		daoType = (Class<? extends T>) pt.getActualTypeArguments()[0];
-		System.out.println("daoType: " + daoType);
 		
 	}
 	

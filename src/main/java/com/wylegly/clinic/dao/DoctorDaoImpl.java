@@ -44,5 +44,18 @@ public class DoctorDaoImpl extends GenericDaoImpl<Doctor> implements DoctorDao {
 				.getSingleResult();
 		return doctor;
 	}
+	
+	@Override
+	public List<Doctor> getAll() {
+		
+		List<Doctor> doctors;
+		
+		doctors = currentSession().createQuery("select doctor "
+				+ "from Doctor doctor "
+				+ "left join fetch doctor.patients", Doctor.class)
+				.getResultList();
+		
+		return doctors;
+	}
 
 }

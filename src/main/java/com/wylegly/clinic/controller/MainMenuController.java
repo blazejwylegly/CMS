@@ -25,19 +25,6 @@ public class MainMenuController {
 
 	}
 
-	//
-	// @RequestMapping(value = "/", method = RequestMethod.GET)
-	// public String main(Locale locale, Model model) {
-	// System.out.println("Main page requested, locale = " + locale);
-	// Date date = new Date();
-	// DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG,
-	// DateFormat.LONG, locale);
-	//
-	// String formattedDate = dateFormat.format(date);
-	// model.addAttribute("serverTime", formattedDate);
-	//
-	// return "main";
-	// }
 
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
 	public String user(@RequestParam("username") String username, @RequestParam("userPassword") String password,

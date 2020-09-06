@@ -9,16 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import com.wylegly.clinic.domain.Patient;
 
-
 @Repository
 public class PatientDaoImpl extends GenericDaoImpl<Patient> implements PatientDao{
-
-	@Override
-	public void patientSpecificMethod() {
-	}
-	/**
-	 * Implement Patient - specific methods
-	 * */
 
 	@Override
 	public List<Patient> searchPatients(String searchedName) {

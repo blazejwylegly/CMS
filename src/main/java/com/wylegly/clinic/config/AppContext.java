@@ -26,6 +26,8 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @ComponentScan(basePackages = "com.wylegly.clinic")
 public class AppContext {
 
+	// Variable that hold all resources/properties 
+	// etc provided under src/main/resources
 	@Autowired
 	private Environment environment;
 	
@@ -52,18 +54,21 @@ public class AppContext {
 	// Define Data source
 	@Bean
 	public DataSource dataSource() {
+		// Create connection pool
 		ComboPooledDataSource dataSource = new ComboPooledDataSource();
+		
+		// Configure data source
 		try {
 			dataSource.setDriverClass(
 					environment.getRequiredProperty("jdbc.driverClassName")
 					);
 		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (PropertyVetoException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		// Configure jdbc properties
 		
 		dataSource.setJdbcUrl(
 				environment.getRequiredProperty("jdbc.url")
@@ -75,11 +80,20 @@ public class AppContext {
 				environment.getRequiredProperty("jdbc.password")
 				);
 		
-//		
-//		dataSource.setInitialPoolSize(getIntProperty("connection.pool.initialPoolSize"));
-//		dataSource.setMinPoolSize(getIntProperty("connection.pool.minPoolSize"));
-//		dataSource.setMaxPoolSize(getIntProperty("connection.pool.maxPoolSize"));		
-//		dataSource.setMaxIdleTime(getIntProperty("connection.pool.maxIdleTime"));
+		// Configure connection pool properties
+		
+		dataSource.setMinPoolSize(
+				Integer.valueOf(environment.getRequiredProperty("connection.pool.minPoolSize"))
+				);
+		dataSource.setMaxPoolSize(
+				Integer.valueOf(environment.getRequiredProperty("connection.pool.maxPoolSize"))
+				);
+		dataSource.setInitialPoolSize(
+				Integer.valueOf(environment.getRequiredProperty("connection.pool.initialPoolSize"))
+				);
+		dataSource.setMaxIdleTime(
+				Integer.valueOf(environment.getRequiredProperty("connection.pool.maxIdleTime"))
+				);
 		
 		return dataSource;
 	}

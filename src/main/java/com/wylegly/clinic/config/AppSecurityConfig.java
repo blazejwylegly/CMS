@@ -1,32 +1,43 @@
 package com.wylegly.clinic.config;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.User.UserBuilder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import com.wylegly.clinic.service.UserService;
 
 @Configuration
 @EnableWebSecurity
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
 
+	@Autowired
+	private DataSource dataSource;
+	
+	@Autowired
+	private UserService userService;
+	
 	// Configure users and encryption
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
-		// add users for in memory authentication
+		auth.jdbcAuthentication().dataSource(dataSource);
 		
-		UserBuilder userBuilder = User.withDefaultPasswordEncoder();
-		
-		auth.inMemoryAuthentication()
-		.withUser(userBuilder.username("john").password("john").roles("user"));
 	}
-
+	
+	// Configure security of web paths in application, login, logout
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		
+		// TODO: Restrict access based on roles
 		http.authorizeRequests()						
 				.anyRequest().authenticated()			// Any request must be authenticated
 			.and()							
@@ -41,8 +52,18 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	}
 
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 	
-	// Configure security of web paths in application, login, logout
+	@Bean
+	public DaoAuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+		provider.setPasswordEncoder(passwordEncoder());
+		provider.setUserDetailsService(userService);
+		return provider;
+	}
 	
 	
 }
