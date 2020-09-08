@@ -37,10 +37,10 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		// TODO: Restrict access based on roles
+		 //TODO: Restrict access based on roles
 		http.authorizeRequests()						
-				.anyRequest().authenticated()			// Any request must be authenticated
-			.and()							
+				.anyRequest().permitAll()			// Any request must be authenticated
+			.and()	
 			.formLogin()								// Customizing the form login process
 				.loginPage("/showLoginForm")			// Show custom form at the requested mapping
 				.loginProcessingUrl("/authenticate")	// Login form should POST data to this url for authentication
@@ -49,6 +49,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
 			.logout().logoutRequestMatcher(
 					new AntPathRequestMatcher("/logout"))
 			.permitAll();
+	
 	
 	}
 

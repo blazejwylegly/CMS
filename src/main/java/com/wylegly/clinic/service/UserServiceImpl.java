@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.wylegly.clinic.controller.security.helper.UserAccountHelper;
 import com.wylegly.clinic.dao.GenericDao;
 import com.wylegly.clinic.dao.RoleDao;
 import com.wylegly.clinic.dao.UserDao;
@@ -55,10 +56,20 @@ public class UserServiceImpl extends GenericServiceImpl<User> implements UserSer
 				user.getUsername(), user.getPassword(), user.getAuthorities());
 	}
 	
+
 	@Override
 	@Transactional
-	public void save(User user) {
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
+	public void save(UserAccountHelper userAccount) {
+		User user = new User();
+		
+		user.setUsername(userAccount.getUsername());
+		System.out.println("Username: " + user.getUsername());
+		user.setPassword(
+				passwordEncoder.encode(userAccount.getPassword())
+				);
+		System.out.println("password: " + user.getPassword());
+		user.setEnabled(true);
+		
 		userDao.saveOrUpdate(user);
 	}
 

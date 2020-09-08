@@ -101,12 +101,6 @@ public class DoctorController {
 		
 		return "doctors-details";
 	}
-	
-//	@GetMapping("/showPatients")
-//	public String showDoctorsPatients(
-//			@RequestParam("doctorId") int id, Model model) {
-//		return "patients/list
-//	}
-	
+
 
 }

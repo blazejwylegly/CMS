@@ -24,12 +24,4 @@ public class LoginController {
 		return "login-page";
 	}
 	
-	
-//	@RequestMapping("/processLogin")
-//	public String showLoginPage(@Valid @ModelAttribute("user") User user,
-//			BindingResult bindingResult) {
-//		//log the input data
-//		if(bindingResult.hasErrors()) return "login-page";
-//		else return "login-confirmation-page";
-//	}
 }

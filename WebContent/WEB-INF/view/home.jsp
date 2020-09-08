@@ -23,13 +23,8 @@ pageEncoding="ISO-8859-1"%>
     <jsp:include
       page="${contextPath.request.contextPath}/WEB-INF/view/components/navigation-bar.jsp"
     ></jsp:include>
-    <p>
-   	 	Welcome <security:authentication property="principal.username"/>
-    </p>
     
-    <p>
-    	Role(s) assigned: <security:authentication property="principal.authorities"/>
-    </p>
+   
     <!-- Display user ID and user authorities -->
     <div class="home-bg"></div>
   </body>
