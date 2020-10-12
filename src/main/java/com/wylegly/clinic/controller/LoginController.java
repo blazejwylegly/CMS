@@ -19,9 +19,13 @@ public class LoginController {
 	}
 	
 	@GetMapping("/showLoginForm")
-	public String showLoginForm(Model model) {
-		
+	public String showLoginForm() {
 		return "login-page";
+	}
+
+	@GetMapping("/accessDenied")
+	public String showAccessDeniedForm() {
+		 return "access-denied";
 	}
 	
 }

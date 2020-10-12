@@ -2,17 +2,12 @@ package com.wylegly.clinic.domain;
 
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
 
-@Entity
+import javax.persistence.*;
+
+@Entity(name = "Role")
 @Table(name = "role")
 public class Role implements GrantedAuthority {
 
@@ -29,7 +24,15 @@ public class Role implements GrantedAuthority {
 			mappedBy = "roles"
 			)
 	private Set<User> users;
-	
+
+	@ManyToMany( fetch = FetchType.LAZY	)
+	@JoinTable(
+			name = "roles_privileges",
+			joinColumns = @JoinColumn(name = "role_id"),
+			inverseJoinColumns = @JoinColumn(name = "privilege_id")
+	)
+	private Set<Privilege> privileges;
+
 	public Role() {
 		
 	}
@@ -56,7 +59,15 @@ public class Role implements GrantedAuthority {
 		return name;
 	}
 	
-	public void setAuhority(String name) {
+	public void setAuthorityName(String name) {
 		this.name = name;
+	}
+
+	public Set<Privilege> getPrivileges() {
+		return privileges;
+	}
+
+	public void setPrivileges(Set<Privilege> privileges) {
+		this.privileges = privileges;
 	}
 }

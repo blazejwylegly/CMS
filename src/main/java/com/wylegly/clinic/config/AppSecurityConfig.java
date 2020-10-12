@@ -11,6 +11,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.access.AccessDeniedHandlerImpl;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.wylegly.clinic.service.UserService;
@@ -24,13 +27,14 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private AuthenticationSuccessHandlerImpl authSuccessHandler;
 	
 	// Configure users and encryption
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		
-		auth.jdbcAuthentication().dataSource(dataSource);
-		
+		auth.authenticationProvider(authenticationProvider());
 	}
 	
 	// Configure security of web paths in application, login, logout
@@ -38,19 +42,31 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		 //TODO: Restrict access based on roles
-		http.authorizeRequests()						
-				.anyRequest().permitAll()			// Any request must be authenticated
+		http.authorizeRequests()
+				.antMatchers("/register/**").permitAll()
+				.antMatchers("/").hasRole("USER")
+				.antMatchers("/patients/**").hasAnyRole("USER",
+				"ADMIN")
+				.antMatchers("/doctors/**").hasAnyRole("ADMIN"
+																)
+				.antMatchers("/procedures/**").hasAnyRole("DOCTOR",
+				"ADMIN")
+				.anyRequest().authenticated()
 			.and()	
-			.formLogin()								// Customizing the form login process
-				.loginPage("/showLoginForm")			// Show custom form at the requested mapping
-				.loginProcessingUrl("/authenticate")	// Login form should POST data to this url for authentication
-				.permitAll()							// Let everyone see the login page
+				.formLogin()								// Customizing the form login process
+					.loginPage("/showLoginForm")			// Show custom form at the requested mapping
+					.loginProcessingUrl("/authenticate")	// Login form should POST data to this url for authentication
+					.successHandler(authSuccessHandler)
+					.permitAll()							// Let everyone see the login page
 			.and()
-			.logout().logoutRequestMatcher(
+				.logout().logoutRequestMatcher(
 					new AntPathRequestMatcher("/logout"))
-			.permitAll();
-	
-	
+				.permitAll()
+			.and()
+				.exceptionHandling()
+				.accessDeniedHandler(accessDeniedHandler())
+				.accessDeniedPage("/accessDenied");
+
 	}
 
 	@Bean
@@ -61,10 +77,13 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-		provider.setPasswordEncoder(passwordEncoder());
-		provider.setUserDetailsService(userService);
+		provider.setPasswordEncoder(passwordEncoder()); // set password encoder
+		provider.setUserDetailsService(userService);	// set custom user details service
 		return provider;
 	}
-	
-	
+
+	@Bean
+	public AccessDeniedHandler accessDeniedHandler() {
+		return new AccessDeniedHandlerImpl();
+	}
 }

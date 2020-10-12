@@ -2,6 +2,7 @@ package com.wylegly.clinic.service;
 
 import javax.transaction.Transactional;
 
+import com.wylegly.clinic.exceptions.UserAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -59,18 +60,24 @@ public class UserServiceImpl extends GenericServiceImpl<User> implements UserSer
 
 	@Override
 	@Transactional
-	public void save(UserAccountHelper userAccount) {
-		User user = new User();
-		
-		user.setUsername(userAccount.getUsername());
-		System.out.println("Username: " + user.getUsername());
-		user.setPassword(
-				passwordEncoder.encode(userAccount.getPassword())
-				);
-		System.out.println("password: " + user.getPassword());
-		user.setEnabled(true);
-		
-		userDao.saveOrUpdate(user);
+	public void saveIfNotExist(UserAccountHelper userAccount) throws UserAlreadyExistsException {
+
+		User existingUser = userDao.findByUsername(userAccount.getUsername());
+		if(existingUser == null) {
+			User newUser = new User();
+			newUser.setUsername(userAccount.getUsername());
+			newUser.setPassword(
+					passwordEncoder.encode(userAccount.getPassword())
+			);
+			newUser.setEnabled(true);
+
+			userDao.saveOrUpdate(newUser);
+		}else{
+			throw new UserAlreadyExistsException("User "
+					+ userAccount.getUsername()
+					+ " already exists!");
+		}
+
 	}
 
 }

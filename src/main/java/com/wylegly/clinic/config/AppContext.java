@@ -62,12 +62,9 @@ public class AppContext {
 			dataSource.setDriverClass(
 					environment.getRequiredProperty("jdbc.driverClassName")
 					);
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (PropertyVetoException e) {
+		} catch (IllegalStateException | PropertyVetoException e) {
 			e.printStackTrace();
 		}
-		
 		// Configure jdbc properties
 		
 		dataSource.setJdbcUrl(
@@ -83,16 +80,16 @@ public class AppContext {
 		// Configure connection pool properties
 		
 		dataSource.setMinPoolSize(
-				Integer.valueOf(environment.getRequiredProperty("connection.pool.minPoolSize"))
+				Integer.parseInt(environment.getRequiredProperty("connection.pool.minPoolSize"))
 				);
 		dataSource.setMaxPoolSize(
-				Integer.valueOf(environment.getRequiredProperty("connection.pool.maxPoolSize"))
+				Integer.parseInt(environment.getRequiredProperty("connection.pool.maxPoolSize"))
 				);
 		dataSource.setInitialPoolSize(
-				Integer.valueOf(environment.getRequiredProperty("connection.pool.initialPoolSize"))
+				Integer.parseInt(environment.getRequiredProperty("connection.pool.initialPoolSize"))
 				);
 		dataSource.setMaxIdleTime(
-				Integer.valueOf(environment.getRequiredProperty("connection.pool.maxIdleTime"))
+				Integer.parseInt(environment.getRequiredProperty("connection.pool.maxIdleTime"))
 				);
 		
 		return dataSource;
