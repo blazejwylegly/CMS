@@ -65,8 +65,10 @@ uri="http://www.springframework.org/tags/form" %>
 
             <tr>
               <td><label>Select doctor in charge:</label></td>
+
               <td>
                 <form:select
+
                   var="doc"
                   path="doctorInCharge"
                   name="selectedDoctor"

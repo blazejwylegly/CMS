@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.wylegly.clinic.domain.DentalProcedure;
+import com.wylegly.clinic.domain.procedures.DentalProcedure;
 import com.wylegly.clinic.service.DoctorService;
 import com.wylegly.clinic.service.PatientService;
-import com.wylegly.clinic.service.ProcedureService;
+import com.wylegly.clinic.service.procedure.DentalProcedureService;
 
 @Controller
 @RequestMapping("/procedures")
 public class ProcedureController {
 
 	@Autowired
-	private ProcedureService procedureService;
+	private DentalProcedureService dentalProcedureService;
 	
 	@Autowired
 	private DoctorService doctorService;
@@ -27,7 +27,7 @@ public class ProcedureController {
 	
 	@GetMapping("/list")
 	public String showListForm(Model model) {
-		model.addAttribute("procedures", procedureService.getAll());
+		model.addAttribute("procedures", dentalProcedureService.getAll());
 		return "procedures-list";
 	}
 

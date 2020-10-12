@@ -52,10 +52,10 @@ public class PatientController {
 
 		if (doctorInChargeValue != null && !doctorInChargeValue.trim().isEmpty()) {
 
-			Integer doctorInChargeId = Integer.parseInt(doctorInChargeValue);
+			Integer doctorInChargeId = -1;
+			doctorInChargeId = Integer.parseInt(doctorInChargeValue);
 
-			if (doctorInChargeId != null) {
-				System.out.println(doctorInChargeId);
+			if (doctorInChargeId != -1) {
 				patient.setDoctorInCharge(doctorService.get(doctorInChargeId));
 			}
 		}

@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%> <%@ page import="com.wylegly.clinic.domain.Person"
-%> <%@ page import="com.wylegly.clinic.domain.Patient" %> <%@ page
-import="com.wylegly.clinic.domain.Doctor" %> <%@ taglib
-uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> <%@ taglib prefix="form"
-uri="http://www.springframework.org/tags/form" %>
+pageEncoding="ISO-8859-1"%>
+<%@ page import="com.wylegly.clinic.domain.Patient" %>
+<%@ page import="com.wylegly.clinic.domain.Doctor" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html>
@@ -39,10 +39,8 @@ uri="http://www.springframework.org/tags/form" %>
   </head>
 
   <body>
-    <jsp:include
-      page="${contextPath.request.contextPath}/WEB-INF/view/components/navigation-bar.jsp"
-    ></jsp:include>
-
+  <jsp:include
+          page="${contextPath.request.contextPath}/WEB-INF/view/components/navigation-bar.jsp"/>
     <div class="container">
       <br />
       <div class="person-list-wrapper">
@@ -110,7 +108,8 @@ uri="http://www.springframework.org/tags/form" %>
               <c:param name="patientId" value="${tempPatient.id}" />
             </c:url>
 
-            <tr>
+            <tr onclick="window.location='${detailsLink}';">
+
               <td>${tempPatient.fullName}</td>
               <td>${tempPatient.pesel}</td>
               <td>

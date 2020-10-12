@@ -1,5 +1,7 @@
 package com.wylegly.clinic.domain;
 
+import com.wylegly.clinic.domain.procedures.DentalProcedure;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

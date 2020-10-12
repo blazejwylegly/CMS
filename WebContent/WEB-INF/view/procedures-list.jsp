@@ -8,7 +8,7 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <%@ page
-import="com.wylegly.clinic.domain.DentalProcedure" %>
+import="com.wylegly.clinic.domain.procedures.DentalProcedure" %>
 
 
 <!DOCTYPE html>

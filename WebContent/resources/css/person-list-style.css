@@ -37,7 +37,8 @@ table.person-list {
   margin-left: auto;
 }
 
-.person-list tr {
+.clickable_row {
+  border: 1px solid #00b8a5;
 }
 
 .person-list tr:first-child {

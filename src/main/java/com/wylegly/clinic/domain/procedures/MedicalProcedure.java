@@ -1,25 +1,16 @@
-package com.wylegly.clinic.domain;
+package com.wylegly.clinic.domain.procedures;
+
+import com.wylegly.clinic.domain.Doctor;
+import com.wylegly.clinic.domain.Patient;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "medical_procedure")
+@Table(name = "medicalProcedure")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class MedicalProcedure{
+public class MedicalProcedure {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,13 +30,20 @@ public class MedicalProcedure{
 			)
 	@JoinColumn(name = "doctor_id")
 	private Doctor doctor;
-	
+
+	// Mapping describes that one patient may have
+	// many appointments planned/done
 	@ManyToOne(
-			fetch = FetchType.LAZY
-			)
+			fetch = FetchType.LAZY,
+			cascade = {
+					CascadeType.MERGE,
+					CascadeType.DETACH,
+					CascadeType.PERSIST,
+					CascadeType.REFRESH
+			})
 	@JoinColumn(name = "patient_id")
 	private Patient patient;
-	
+
 	public MedicalProcedure() {
 		
 	}
@@ -53,7 +51,6 @@ public class MedicalProcedure{
 	public int getId() {
 		return id;
 	}
-
 
 	public void setId(int id) {
 		this.id = id;

@@ -3,9 +3,7 @@ pageEncoding="ISO-8859-1"%>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
 prefix="c" %> 
 <%@ taglib prefix="form"
-uri="http://www.springframework.org/tags/form" %> 
-<%@ page
-import="com.wylegly.clinic.domain.Person" %> 
+uri="http://www.springframework.org/tags/form" %>
 <%@ page
 import="com.wylegly.clinic.domain.Doctor" %>
 
@@ -48,9 +46,7 @@ import="com.wylegly.clinic.domain.Doctor" %>
   <body>
     <!-- Include navigation bar -->
     <jsp:include
-      page="${contextPath.request.contextPath}/WEB-INF/view/components/navigation-bar.jsp"
-    ></jsp:include>
-
+            page="${contextPath.request.contextPath}/WEB-INF/view/components/navigation-bar.jsp"/>
     <div class="container">
      
       <div class="person-list-wrapper">
@@ -111,7 +107,10 @@ import="com.wylegly.clinic.domain.Doctor" %>
             <% Doctor currentDoctor =
             (Doctor)pageContext.getAttribute("tempDoctor"); %>
 
-            <tr>
+            <tr
+            onclick="window.location='${detailsLink}';"
+            class="clickable_row">
+
               <td>${tempDoctor.fullName}</td>
               <td>${tempDoctor.pesel}</td>
               <td>
