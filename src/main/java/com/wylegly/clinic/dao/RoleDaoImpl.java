@@ -13,24 +13,28 @@ implements RoleDao{
 
 	@Override
 	public Role get(int id) {
-		Role authority = null;
-		authority = currentSession().createQuery("select role "
+		return currentSession().createQuery("select role "
 				+ "from Role role "
 				+ "left join fetch role.users "
-				+ "where role.id = :theId", Role.class)
+				+ "left join fetch role.privileges "
+				+ "where role.id = :theId "
+				+ "and role.name like :thePrefix", Role.class)
 				.setParameter("theId", id)
+				.setParameter("thePrefix", "'%ROLE_'")
 				.getSingleResult();
-		return authority;
 				
 	}
 	
 	@Override
 	public List<Role> getAll() {
-		List<Role> authorities = null;
-		
-		authorities = currentSession().createQuery("from Role", 
-				Role.class).getResultList();
-				
-		return authorities;
+
+		return currentSession().createQuery("select role "
+				+ "from Role role "
+				+ "left join fetch role.users "
+				+ "left join fetch role.privileges "
+				+ "where role.name like :thePrefix", Role.class)
+				.setParameter("thePrefix", "'%ROLE_'")
+				.getResultList();
+
 	}
 }

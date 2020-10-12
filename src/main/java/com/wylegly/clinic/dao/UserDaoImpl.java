@@ -12,13 +12,12 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 
 	@Override
 	public User get(int id) {
-		User user = currentSession().createQuery("select user " 
+		return currentSession().createQuery("select user "
 				+ "from User user "
 				+ "left join fetch user.roles "
 				+ "where user.id = :theId", User.class)
 				.setParameter("theId", id)
 				.getSingleResult();
-		return user;
 	}
 
 	@Override
