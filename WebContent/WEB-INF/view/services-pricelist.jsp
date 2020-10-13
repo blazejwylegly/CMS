@@ -3,6 +3,7 @@
 <%@ page import="java.time.Duration" %>
 <%@ page import="com.wylegly.clinic.domain.procedures.details.DentalDetails" %>
 <%@ page import="java.text.DateFormat" %>
+<%@ page import="com.wylegly.clinic.domain.procedures.details.DentalBundleDetails" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -122,8 +123,8 @@
 <%--                        Cost display--%>
                         <td>
                             <%
-                                DentalDetails details =
-                                        (DentalDetails) pageContext.getAttribute("bundleDetails");
+                                DentalBundleDetails details =
+                                        (DentalBundleDetails) pageContext.getAttribute("bundleDetails");
                                 DecimalFormat formatter = new DecimalFormat("#0.00 PLN");
                             %>
                             <% if (details.getCost() != null){ %>
@@ -151,9 +152,24 @@
                             Not provided
                             <% } %>
                         </td>
-                        <td></td>
+
+                        <td>
+                            <%= formatter.format(details.getMoneySaved())%>
+                        </td>
+
                         <td>${bundleDetails.description}</td>
-                        <td></td>
+
+                        <%-- Display bundle contents--%>
+                        <td>
+                            <ul>
+                                <c:forEach var="singleDetails" items="${bundleDetails.proceduresDetails}">
+                                    <li>
+                                        ${singleDetails.name}
+                                    </li>
+                                </c:forEach>
+                            </ul>
+
+                        </td>
                     </tr>
                 </c:forEach>
             </table>

@@ -18,6 +18,9 @@ public class DentalBundleDetails
     private Double cost;
 
     @Transient
+    private Double moneySaved;
+
+    @Transient
     private Duration duration;
 
 
@@ -31,6 +34,11 @@ public class DentalBundleDetails
         for (DentalProcedureDetails proceduresDetail : proceduresDetails) {
             cost += proceduresDetail.getCost();
             duration = duration.plus(proceduresDetail.getDuration());
+        }
+
+        if(discount > 0){
+            moneySaved = cost * (discount / 100.0);
+            cost -= moneySaved;
         }
     }
 
@@ -58,7 +66,7 @@ public class DentalBundleDetails
     @Override
     public Double getCost() {
 
-        if(discount > 0) return cost*discount;
+
         return cost;
     }
 
@@ -77,6 +85,11 @@ public class DentalBundleDetails
         this.discount = discount;
     }
 
+    public Double getMoneySaved() {
+        return moneySaved;
+    }
 
-
+    public List<DentalProcedureDetails> getProceduresDetails() {
+        return proceduresDetails;
+    }
 }
